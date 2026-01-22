@@ -152,27 +152,6 @@ def main():
     st.header("AI 房租评估")
     st.info(f"根据 AI 专家评估，在 **{location}** 附近租一个单间的平均月租金大约是 **¥{monthly_rent:,.2f}**。")
 
-    # 不同城市对比
-    st.header("不同城市到手价对比")
-    
-    # 模拟数据用于城市对比
-    cities_for_comparison = ["北京", "上海", "深圳", "广州", "杭州"]
-    comparison_data = []
-
-    for c in cities_for_comparison:
-        # 假设在不同城市，基本工资和奖金可能不同，这里为了简化先用相同的基数
-        # 实际应用中可以更复杂地模拟
-        monthly_total_income_comp = base_salary + (bonus / 12)
-        insurance_deduction_comp = base_salary * (insurance_rate / 100)
-        salary_after_insurance_comp = monthly_total_income_comp - insurance_deduction_comp
-        monthly_tax_comp = calculate_tax(salary_after_insurance_comp, c)
-        take_home_pay_comp = salary_after_insurance_comp - monthly_tax_comp
-        
-        comparison_data.append({"城市": c, "税后到手价": take_home_pay_comp})
-
-    df_comparison = pd.DataFrame(comparison_data)
-    fig = px.line(df_comparison, x="城市", y="税后到手价", title="不同城市税后到手价对比")
-    st.plotly_chart(fig, use_container_width=True)
 
 if __name__ == "__main__":
     main()
